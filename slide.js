@@ -1,5 +1,17 @@
+
+
 function PageSwitch(element,options){
    this.settings = extend(PageSwitch.default,options||{});
+   this.element = element;
+   this.init();
+}
+
+PageSwitch.prototype ={
+	/*说明：初始化插件*/
+	/*实现：初始化dom结构，布局、分页及绑定事件*/
+	init: function(){
+
+	}
 }
 
 PageSwitch.default = {
@@ -27,15 +39,18 @@ function extendObj(default,options){
 	var tempObj = cloneObj(default);
 
 	for(var ind in options){
-        if(typeof ind === "string"){
-
-        }
+       tempObj[ind] = options[ind];
 	}
+	return tempObj;
 
 }
 
 //拷贝对象
 function cloneObj(oldObj){
+	var newObj = {};
     if(oldObj == null || typeof oldObj != "object") return oldObj;
-    
+    for(var i in oldObj){
+          newObj[i] = oldObj[i]
+    }
+    return newObj;
 }
