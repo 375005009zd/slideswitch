@@ -7,7 +7,7 @@
 	     	margin:0;
 	     	padding:0;
 	     }
-	     html,body,.container{
+	     html,body,.container,.sections{
 	     	width:100%;
 	     	height:100%;
 	     }
@@ -28,14 +28,89 @@
 		.section:nth-child(4){
           background-image:url(./ikon4.jpeg);
 		}
+
+		.pages{
+			position: fixed;
+		    top: 50%;
+		    right: 3%;
+		    list-style: none;
+		}
+
+		.pages li {
+			text-align: center;
+		    width: 10px;
+		    height: 10px;
+		    border: 2px solid #e95953;
+		    border-radius: 20px;
+		    margin: 8px auto 0px;
+		}
+
+        li.active{
+        	width: 15px;
+		    height: 15px;
+		    border: 4px solid #de2b36;
+		    border-radius: 20px;
+        }
 	</style>
 </head>
 <body>
-    <div class="container">
-    	<div class="section"></div>
-    	<div class="section"></div>
-    	<div class="section"></div>
-    	<div class="section"></div>
+	<div class="container">
+	    <div class="sections">
+	    	<div class="section"></div>
+	    	<div class="section"></div>
+	    	<div class="section"></div>
+	    	<div class="section"></div>
+	    </div>
+
+	    <ul class="pages">
+	    	<li class="active"></li>
+	    	<li></li>
+	    	<li></li>
+	    	<li></li>
+	    </ul>
     </div>
+    <script type="text/javascript">
+    	(function(){
+    		var _prefix = (function _prefix(temp){
+            		var aPrefix = ['Webkit','Moz','o','ms'],
+            		    props = "";
+            		for(var i in aPrefix){
+                         props = aPrefix[i] + 'Transition';
+                         if(temp.style[props] !== undefined){
+                             return props;
+                         }
+            		}
+                    return false;
+            	})(document.createElement('div'));
+            	
+            var elementList = document.getElementsByTagName('li');
+            var ulNode = document.getElementsByTagName('ul')[0];
+            ulNode.addEventListener('click',function(){
+ 
+            	var target = event.target;
+            	for(var i=0;i<elementList.length;i++){
+            		if(elementList[i]==target){
+            			elementList[i].style[_prefix] = "all 50s";
+            			elementList[i].setAttribute("class","active");
+            			clearSibingClassName(target);
+            			i
+            		}
+            	}
+
+
+            	function clearSibingClassName(el){
+                    var elementLis = el.parentElement.children;
+                    for(var i=0;i<elementLis.length;i++){
+                    	if(elementLis[i]!=el){
+                              elementLis[i].setAttribute("class","");
+                    	}
+                    }
+            	}
+
+
+            	
+            });
+    	})();
+    </script>
 </body>
 </html>
